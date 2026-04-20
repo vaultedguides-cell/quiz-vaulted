@@ -19,18 +19,21 @@
         p{font-size:14px;color:#6a80a0;line-height:1.7;margin-bottom:24px;}
         .opt{display:flex;align-items:center;gap:14px;padding:13px 18px;border:2px solid #E8EEF5;border-radius:12px;cursor:pointer;margin-bottom:10px;transition:.2s;text-align:left;font-size:14px;font-weight:500;}
         .opt:hover{border-color:#00D4FF;background:#f0fcff;}
+        
+        /* Botones */
         .btn-res{background:#0D1F3C;color:#fff;border:none;padding:18px 44px;border-radius:14px;font-size:17px;font-weight:800;cursor:pointer;width:100%;text-decoration:none;display:inline-block;margin-top:10px;font-family:'DM Sans',sans-serif; text-align:center; transition: 0.3s;}
         .btn-res:hover{transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
-        
-        /* Estilo para el botón bloqueado */
         .btn-locked { background: #cbd5e1 !important; color: #64748b !important; cursor: not-allowed !important; pointer-events: none; opacity: 0.6; }
-        
         .btn-restart{background:transparent; color:#6a80a0; border:none; text-decoration:underline; font-size:12px; margin-top:20px; cursor:pointer;}
+        
+        /* Resultados */
         .result-header { background: #f8fafc; padding: 24px; border-radius: 16px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
-        .diag-level { font-family: 'Playfair Display', serif; font-size: 26px; color: #0D1F3C; margin-bottom: 8px; }
-        .benefit-list{text-align:left;margin:20px 0;background:#f4f7fb;padding:20px;border-radius:12px;border-left:4px solid #C9A84C;}
-        .benefit-item{margin-bottom:12px;font-size:13px;color:#1a2a3a;display:flex;flex-direction:column;gap:4px;}
-        .benefit-item b { color: #0D1F3C; font-size: 14px; }
+        .diag-level { font-family: 'Playfair Display', serif; font-size: 24px; color: #0D1F3C; margin-bottom: 12px; font-weight: 700; }
+        .benefit-list{text-align:left;margin:20px 0;}
+        .benefit-item { margin-bottom: 15px; font-size: 14px; background: #f4f7fb; padding: 15px; border-radius: 10px; border-left: 4px solid #C9A84C; box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
+        .benefit-item b { color: #C9A84C; display: block; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin-bottom: 4px; }
+        
+        /* Cupón */
         .coupon-section { background: linear-gradient(135deg, #0D1F3C, #1a2a3a); color: white; padding: 30px; border-radius: 16px; margin: 25px 0; border: 2px solid #C9A84C; }
         .off-tag { font-size: 38px; font-weight: 900; color: #C9A84C; display: block; margin-bottom: 5px; letter-spacing: -1px; }
         .coupon-code { font-family: 'DM Mono', monospace; font-size: 28px; color: #00D4FF; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border: 1px dashed rgba(0,212,255,0.4); display: block; margin: 15px 0; }
@@ -56,7 +59,7 @@
     <div class="page" id="p_email">
         <div class="em" style="font-size: 44px; margin-bottom: 10px;">🔒</div>
         <h1>Results Locked</h1>
-        <p>Complete Step 1 to unlock your $20 coupon and diagnosis.</p>
+        <p>Complete Step 1 to unlock your professional diagnosis and $20 OFF coupon.</p>
         
         <div style="text-align: left; background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
             <p style="margin-bottom: 10px; color: #0D1F3C;"><b>Step 1:</b> Subscribe to unlock (New tab).</p>
@@ -69,26 +72,29 @@
                 1. SUBSCRIBE TO UNLOCK
             </a>
             
-            <p style="margin-top: 25px; margin-bottom: 10px; color: #0D1F3C;"><b>Step 2:</b> Click below after subscribing.</p>
+            <p style="margin-top: 25px; margin-bottom: 10px; color: #0D1F3C;"><b>Step 2:</b> Return here and click below.</p>
             <button id="btn-results" class="btn-res btn-locked" onclick="showPage('final')">
                 2. VIEW MY RESULTS
             </button>
         </div>
-        
         <button class="btn-restart" onclick="restartQuiz()">Restart Quiz</button>
     </div>
 
     <div class="page" id="p_final">
         <div class="result-header">
             <div class="diag-level" id="diagLevel">Analyzing...</div>
-            <p id="diagText" style="margin-bottom:0; font-size:14px;"></p>
+            <p id="diagText" style="margin-bottom:0; font-size:14px; font-style: italic;"></p>
         </div>
         <div class="benefit-list" id="dynamicBenefits"></div>
+        
         <div class="coupon-section">
             <span class="off-tag">$20.00 OFF</span>
+            <p style="color:rgba(255,255,255,0.7); font-size:12px;">Use this code at checkout:</p>
             <div class="coupon-code">VAULT50</div>
-            <p style="font-size:11px; color:#C9A84C; font-weight:700;">ONLY 50 USES TOTAL</p>
+            <p style="font-size:11px; color:#C9A84C; font-weight:700;">VALID FOR THE NEXT 24 HOURS</p>
         </div>
+        
+        <p style="font-size:13px; margin-bottom:15px;">Get the full <b>Vaulted Guides Bundle</b> and stop leaking profit today:</p>
         <a href="https://payhip.com/b/RexyV" target="_blank" class="btn-res">GET THE BUNDLE HERE</a>
         <br><button class="btn-restart" onclick="restartQuiz()">Restart Quiz</button>
     </div>
@@ -104,14 +110,13 @@
         if(id === 'final') calculateResult();
     }
 
-    // Función para desbloquear el segundo botón
     function unlock() {
         setTimeout(function() {
             const btnResults = document.getElementById('btn-results');
             btnResults.classList.remove('btn-locked');
-            btnResults.style.background = "#0D1F3C"; // Vuelve a su color azul original
+            btnResults.style.background = "#0D1F3C";
             btnResults.innerText = "2. VIEW MY RESULTS (Unlocked!)";
-        }, 1000); // Se desbloquea 1 segundo después del clic
+        }, 1200);
     }
 
     function next(current, score) {
@@ -125,18 +130,31 @@
         const text = document.getElementById('diagText');
         const benefits = document.getElementById('dynamicBenefits');
         let content = "";
+
         if(totalScore <= 50) {
-            level.innerText = "The Manual Trap";
-            text.innerText = "You are trading 100% of your time for money.";
-            content = `<div class="benefit-item">💰 <b>High Revenue Leak:</b> Losing $1,500+ monthly.</div><div class="benefit-item">🤖 <b>Automation Gap:</b> Reclaim 15+ hours/week.</div>`;
+            level.innerText = "🚨 CRITICAL: The Manual Operator Trap";
+            text.innerText = "Your business is currently 100% dependent on your physical time. If you stop, the income stops. You're not running a business; you're working a high-stress job.";
+            content = `
+                <div class="benefit-item"><b>💸 Annual Profit Leak:</b> Estimated $18,000+ lost in unbillable admin tasks and manual follow-ups.</div>
+                <div class="benefit-item"><b>⏳ Time Recovery:</b> You can reclaim 60+ hours a month by implementing our AI Automation Roadmap.</div>
+                <div class="benefit-item"><b>🛠 Priority Fix:</b> You need standardized SOPs and basic AI delegation to stop the burnout.</div>
+            `;
         } else if(totalScore <= 90) {
-            level.innerText = "The Hybrid Struggle";
-            text.innerText = "You have tools, but no system.";
-            content = `<div class="benefit-item">💰 <b>Moderate Leak:</b> Losing $800+ monthly.</div><div class="benefit-item">🤖 <b>Automation Gap:</b> Reclaim 8-10 hours/week.</div>`;
+            level.innerText = "⚠️ WARNING: The Hybrid Chaos Phase";
+            text.innerText = "You have tools, but they don't talk to each other. You're working harder than necessary because your systems aren't integrated. You are at the edge of scaling, but friction is holding you back.";
+            content = `
+                <div class="benefit-item"><b>📉 Efficiency Leak:</b> You're operating at only 40% of your potential capacity due to 'technical friction'.</div>
+                <div class="benefit-item"><b>🤖 The Missing Link:</b> Your business needs automated workflows to scale without adding expensive staff.</div>
+                <div class="benefit-item"><b>🚀 Scaling Potential:</b> Streamlining your current chaos could double your output in less than 30 days.</div>
+            `;
         } else {
-            level.innerText = "Ready to Scale";
-            text.innerText = "You have the basics, but need professional SOPs.";
-            content = `<div class="benefit-item">💰 <b>Profit Leak:</b> Even pros lose $400+ monthly.</div><div class="benefit-item">🤖 <b>Optimization:</b> Reclaim those last 5 hours.</div>`;
+            level.innerText = "🏆 ELITE: Ready for AI Expansion";
+            text.innerText = "You have a solid foundation, but you're missing the 'Pro-Level' automation that separates 6-figure businesses from 7-figure ones. It's time to optimize the last 10%.";
+            content = `
+                <div class="benefit-item"><b>💎 Opportunity Gap:</b> Small friction points in your funnel are costing you 'hidden' high-ticket clients.</div>
+                <div class="benefit-item"><b>⚡ Performance Boost:</b> Fine-tuning your SOPs will allow for 100% passive lead generation and management.</div>
+                <div class="benefit-item"><b>🎯 Next Step:</b> Implement the FIRT System to remove yourself entirely from the daily operation.</div>
+            `;
         }
         benefits.innerHTML = content;
     }
@@ -144,9 +162,9 @@
     function restartQuiz() {
         totalScore = 0;
         document.getElementById('progressFill').style.width = '0%';
-        // Al reiniciar, volvemos a bloquear el botón para la próxima vez
         const btnResults = document.getElementById('btn-results');
         btnResults.classList.add('btn-locked');
+        btnResults.innerText = "2. VIEW MY RESULTS";
         showPage(0);
     }
 </script>
