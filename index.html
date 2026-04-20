@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Readiness Test — Vaulted Guides</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <script>
+        (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+        .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+        n=d.getElementsByTagName(e),n.parentNode.insertBefore(l,n);})
+        (window,document,'script','https://assets.mailerlite.com/js/universal.js');
+        
+        ml('account', '2274104');
+    </script>
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html,body{overflow-x:hidden;min-height:100vh;background:#0D1F3C;font-family:'DM Sans',sans-serif;}
+        body{background:linear-gradient(135deg,#06101f,#0D1F3C,#091728);display:flex;flex-direction:column;align-items:center;padding:20px 16px 60px;}
+        .card{width:100%;max-width:600px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4);color: #0D1F3C;}
+        .bar{height:5px;background:#E8EEF5;}
+        .fill{height:100%;background:linear-gradient(90deg,#00D4FF,#C9A84C);width:0%;transition:width .4s;}
+        .page{display:none; padding:40px 32px; text-align:center;}
+        .page.on{display:block;}
+        h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,32px);margin-bottom:14px;color: #0D1F3C;}
+        p{font-size:14px;color:#6a80a0;line-height:1.7;margin-bottom:24px;}
+        .opt{display:flex;align-items:center;gap:14px;padding:13px 18px;border:2px solid #E8EEF5;border-radius:12px;cursor:pointer;margin-bottom:10px;transition:.2s;text-align:left;font-size:14px;font-weight:500;}
+        .opt:hover{border-color:#00D4FF;background:#f0fcff;}
+        .btn-res{background:#0D1F3C;color:#fff;border:none;padding:18px 44px;border-radius:14px;font-size:17px;font-weight:800;cursor:pointer;width:100%;text-decoration:none;display:inline-block;margin-top:10px;font-family:'DM Sans',sans-serif; text-align:center;}
+        .btn-restart{background:transparent; color:#6a80a0; border:none; text-decoration:underline; font-size:12px; margin-top:20px; cursor:pointer;}
+        .result-header { background: #f8fafc; padding: 24px; border-radius: 16px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
+        .diag-level { font-family: 'Playfair Display', serif; font-size: 26px; color: #0D1F3C; margin-bottom: 8px; }
+        .benefit-list{text-align:left;margin:20px 0;background:#f4f7fb;padding:20px;border-radius:12px;border-left:4px solid #C9A84C;}
+        .benefit-item{margin-bottom:12px;font-size:13px;color:#1a2a3a;display:flex;flex-direction:column;gap:4px;}
+        .benefit-item b { color: #0D1F3C; font-size: 14px; }
+        .coupon-section { background: linear-gradient(135deg, #0D1F3C, #1a2a3a); color: white; padding: 30px; border-radius: 16px; margin: 25px 0; border: 2px solid #C9A84C; }
+        .off-tag { font-size: 38px; font-weight: 900; color: #C9A84C; display: block; margin-bottom: 5px; letter-spacing: -1px; }
+        .coupon-code { font-family: 'DM Mono', monospace; font-size: 28px; color: #00D4FF; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border: 1px dashed rgba(0,212,255,0.4); display: block; margin: 15px 0; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="bar"><div class="fill" id="progressFill"></div></div>
+
+    <div class="page on" id="p0">
+        <h1>The 5-Question <i>AI Readiness</i> Test</h1>
+        <p>Find out where your business is leaking profit and get the tools to fix it.</p>
+        <button class="btn-res" onclick="showPage(1)">Start Free Test</button>
+    </div>
+
+    <div class="page" id="p1"><h1>Question 1: AI Delegation?</h1><div class="opt" onclick="next(1, 5)">Nothing.</div><div class="opt" onclick="next(1, 15)">Basic tools.</div><div class="opt" onclick="next(1, 25)">Automated workflows.</div></div>
+    <div class="page" id="p2"><h1>Question 2: Admin Costs?</h1><div class="opt" onclick="next(2, 5)">No tracking.</div><div class="opt" onclick="next(2, 15)">Unorganized.</div><div class="opt" onclick="next(2, 25)">Pro calculators.</div></div>
+    <div class="page" id="p3"><h1>Question 3: Time Lost?</h1><div class="opt" onclick="next(3, 5)">15+ hours.</div><div class="opt" onclick="next(3, 15)">5-10 hours.</div><div class="opt" onclick="next(3, 25)">Less than 5.</div></div>
+    <div class="page" id="p4"><h1>Question 4: SOPs?</h1><div class="opt" onclick="next(4, 5)">Nothing written.</div><div class="opt" onclick="next(4, 15)">Basic docs.</div><div class="opt" onclick="next(4, 25)">Runs on SOPs.</div></div>
+    <div class="page" id="p5"><h1>Question 5: Scaling?</h1><div class="opt" onclick="next(5, 5)">At my limit.</div><div class="opt" onclick="next(5, 15)">Working more hours.</div><div class="opt" onclick="next(5, 25)">Scaling with Tech/AI.</div></div>
+
+    <div class="page" id="p_email">
+        <div class="em" style="font-size: 44px; margin-bottom: 10px;">🔒</div>
+        <h1>Results Locked</h1>
+        <p>Please subscribe to unlock your diagnosis and your $20 OFF coupon.</p>
+        
+        <button class="btn-res" style="background:#C9A84C; color:#0D1F3C;" onclick="ml('show', '184965579010999629', true)">
+            SUBSCRIBE TO UNLOCK
+        </button>
+        
+        <p style="margin-top:25px; font-size:12px; color:#6a80a0;"><b>Step 2:</b> After subscribing, click the button below to see your solution.</p>
+        <button class="btn-res" onclick="showPage('final')">View My Results</button>
+        <br><button class="btn-restart" onclick="restartQuiz()">Restart Quiz</button>
+    </div>
+
+    <div class="page" id="p_final">
+        <div class="result-header">
+            <div class="diag-level" id="diagLevel">Analyzing...</div>
+            <p id="diagText" style="margin-bottom:0; font-size:14px;"></p>
+        </div>
+        <div class="benefit-list" id="dynamicBenefits"></div>
+        <div class="coupon-section">
+            <span class="off-tag">$20.00 OFF</span>
+            <div class="coupon-code">VAULT50</div>
+            <p style="font-size:11px; color:#C9A84C; font-weight:700;">ONLY 50 USES TOTAL</p>
+        </div>
+        <a href="https://payhip.com/b/RexyV" target="_blank" class="btn-res">GET THE BUNDLE HERE</a>
+        <br><button class="btn-restart" onclick="restartQuiz()">Restart Quiz</button>
+    </div>
+</div>
+
+<script>
+    let totalScore = 0;
+
+    function showPage(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+        const target = id === 'final' ? document.getElementById('p_final') : id === 'email' ? document.getElementById('p_email') : document.getElementById('p' + id);
+        
+        if(target) target.classList.add('on');
+        if(id === 'final') calculateResult();
+    }
+
+    function next(current, score) {
+        totalScore += score;
+        document.getElementById('progressFill').style.width = (current * 20) + '%';
+        current < 5 ? showPage(current + 1) : showPage('email');
+    }
+
+    function calculateResult() {
+        const level = document.getElementById('diagLevel');
+        const text = document.getElementById('diagText');
+        const benefits = document.getElementById('dynamicBenefits');
+        let content = "";
+        if(totalScore <= 50) {
+            level.innerText = "The Manual Trap";
+            text.innerText = "You are trading 100% of your time for money.";
+            content = `<div class="benefit-item">💰 <b>High Revenue Leak:</b> Losing $1,500+ monthly.</div><div class="benefit-item">🤖 <b>Automation Gap:</b> Reclaim 15+ hours/week.</div>`;
+        } else if(totalScore <= 90) {
+            level.innerText = "The Hybrid Struggle";
+            text.innerText = "You have tools, but no system.";
+            content = `<div class="benefit-item">💰 <b>Moderate Leak:</b> Losing $800+ monthly.</div><div class="benefit-item">🤖 <b>Automation Gap:</b> Reclaim 8-10 hours/week.</div>`;
+        } else {
+            level.innerText = "Ready to Scale";
+            text.innerText = "You have the basics, but need professional SOPs.";
+            content = `<div class="benefit-item">💰 <b>Profit Leak:</b> Even pros lose $400+ monthly.</div><div class="benefit-item">🤖 <b>Optimization:</b> Reclaim those last 5 hours.</div>`;
+        }
+        benefits.innerHTML = content;
+    }
+
+    function restartQuiz() {
+        totalScore = 0;
+        document.getElementById('progressFill').style.width = '0%';
+        showPage(0);
+    }
+</script>
+</body>
+</html>
