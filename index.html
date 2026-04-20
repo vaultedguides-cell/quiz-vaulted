@@ -9,12 +9,13 @@
     <script>
         (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
         .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-        n=d.getElementsByTagName(e),n.parentNode.insertBefore(l,n);})
-        (window,document,'script','https://assets.mailerlite.com/js/universal.js');
+        n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+        (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
         ml('account', '2274104');
     </script>
 
     <style>
+        /* Estilos Generales */
         *{margin:0;padding:0;box-sizing:border-box;}
         html,body{overflow-x:hidden;min-height:100vh;background:#0D1F3C;font-family:'DM Sans',sans-serif;}
         body{background:linear-gradient(135deg,#06101f,#0D1F3C,#091728);display:flex;flex-direction:column;align-items:center;padding:20px 16px 60px;}
@@ -28,16 +29,23 @@
         .opt{display:flex;align-items:center;gap:14px;padding:13px 18px;border:2px solid #E8EEF5;border-radius:12px;cursor:pointer;margin-bottom:10px;transition:.2s;text-align:left;font-size:14px;font-weight:500;}
         .opt:hover{border-color:#00D4FF;background:#f0fcff;}
         .btn-res{background:#0D1F3C;color:#fff;border:none;padding:18px 44px;border-radius:14px;font-size:17px;font-weight:800;cursor:pointer;width:100%;text-decoration:none;display:inline-block;margin-top:10px;font-family:'DM Sans',sans-serif; text-align:center;}
-        .btn-restart{background:transparent; color:#6a80a0; border:none; text-decoration:underline; font-size:12px; margin-top:20px; cursor:pointer;}
+        
+        /* Estilos MailerLite (Basados en tu CSS) */
+        .ml-embedded { margin-top: 20px; min-height: 150px; }
+        #mlb2-40040736.ml-form-embedContainer .ml-form-embedWrapper {
+            background-color: #f6f6f6 !important;
+            border-radius: 12px !important;
+            border: none !important;
+        }
+
+        /* Resultados */
         .result-header { background: #f8fafc; padding: 24px; border-radius: 16px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
         .diag-level { font-family: 'Playfair Display', serif; font-size: 26px; color: #0D1F3C; margin-bottom: 8px; }
         .benefit-list{text-align:left;margin:20px 0;background:#f4f7fb;padding:20px;border-radius:12px;border-left:4px solid #C9A84C;}
-        .benefit-item{margin-bottom:12px;font-size:13px;color:#1a2a3a;display:flex;flex-direction:column;gap:4px;}
-        .benefit-item b { color: #0D1F3C; font-size: 14px; }
+        .benefit-item{margin-bottom:12px;font-size:13px;color:#1a2a3a;}
         .coupon-section { background: linear-gradient(135deg, #0D1F3C, #1a2a3a); color: white; padding: 30px; border-radius: 16px; margin: 25px 0; border: 2px solid #C9A84C; }
-        .off-tag { font-size: 38px; font-weight: 900; color: #C9A84C; display: block; margin-bottom: 5px; letter-spacing: -1px; }
-        .coupon-code { font-family: 'DM Mono', monospace; font-size: 28px; color: #00D4FF; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border: 1px dashed rgba(0,212,255,0.4); display: block; margin: 15px 0; }
-        .ml-embedded { margin-top: 20px; min-height: 100px; }
+        .off-tag { font-size: 38px; font-weight: 900; color: #C9A84C; display: block; margin-bottom: 5px; }
+        .coupon-code { font-size: 28px; color: #00D4FF; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border: 1px dashed rgba(0,212,255,0.4); display: block; margin: 15px 0; }
     </style>
 </head>
 <body>
@@ -58,15 +66,14 @@
     <div class="page" id="p5"><h1>Question 5: Scaling?</h1><div class="opt" onclick="next(5, 5)">At my limit.</div><div class="opt" onclick="next(5, 15)">Working more hours.</div><div class="opt" onclick="next(5, 25)">Scaling with Tech/AI.</div></div>
 
     <div class="page" id="p_email">
-        <div class="em" style="font-size: 44px; margin-bottom: 10px;">🔒</div>
+        <div style="font-size: 44px; margin-bottom: 10px;">🔒</div>
         <h1>Results Locked</h1>
         <p>Subscribe to unlock your dynamic diagnosis and your $20 OFF coupon.</p>
         
-        <div class="ml-embedded" data-form="184965579010999629"></div>
+        <div class="ml-embedded" data-form="40040736" id="mlb2-40040736"></div>
         
-        <p style="margin-top:20px; font-size:12px;">Step 2: After subscribing, click below to see your solution.</p>
+        <p style="margin-top:20px; font-size:12px;">Step 2: Once subscribed, click below to see your results.</p>
         <button class="btn-res" onclick="showPage('final')">Show My Solution</button>
-        <br><button class="btn-restart" onclick="restartQuiz()">Restart Quiz</button>
     </div>
 
     <div class="page" id="p_final">
@@ -78,10 +85,8 @@
         <div class="coupon-section">
             <span class="off-tag">$20.00 OFF</span>
             <div class="coupon-code">VAULT50</div>
-            <p style="font-size:11px; color:#C9A84C; font-weight:700;">ONLY 50 USES TOTAL</p>
         </div>
         <a href="https://payhip.com/b/RexyV" target="_blank" class="btn-res">GET THE BUNDLE HERE</a>
-        <br><button class="btn-restart" onclick="restartQuiz()">Restart Quiz</button>
     </div>
 </div>
 
@@ -94,9 +99,13 @@
         
         if(target) target.classList.add('on');
 
-        // Forzar carga de MailerLite cuando la página sea visible
-        if(id === 'email' && typeof ml !== 'undefined') {
-            ml('run');
+        // Activador corregido para MailerLite
+        if(id === 'email') {
+            setTimeout(function(){
+                if(typeof ml !== 'undefined') {
+                    ml('run'); 
+                }
+            }, 400);
         }
 
         if(id === 'final') calculateResult();
@@ -112,27 +121,19 @@
         const level = document.getElementById('diagLevel');
         const text = document.getElementById('diagText');
         const benefits = document.getElementById('dynamicBenefits');
-        let content = "";
         if(totalScore <= 50) {
             level.innerText = "The Manual Trap";
             text.innerText = "You are trading 100% of your time for money.";
-            content = `<div class="benefit-item">💰 <b>High Revenue Leak:</b> Losing $1,500+ monthly.</div><div class="benefit-item">🤖 <b>Automation Gap:</b> Reclaim 15+ hours/week.</div>`;
+            benefits.innerHTML = `<div class="benefit-item">💰 <b>High Revenue Leak:</b> Losing $1,500+ monthly due to lack of AI automation.</div>`;
         } else if(totalScore <= 90) {
             level.innerText = "The Hybrid Struggle";
-            text.innerText = "You have tools, but no system.";
-            content = `<div class="benefit-item">💰 <b>Moderate Leak:</b> Losing $800+ monthly.</div><div class="benefit-item">🤖 <b>Automation Gap:</b> Reclaim 8-10 hours/week.</div>`;
+            text.innerText = "You have tools, but no efficient system.";
+            benefits.innerHTML = `<div class="benefit-item">💰 <b>Moderate Leak:</b> Losing $800+ monthly in manual admin tasks.</div>`;
         } else {
             level.innerText = "Ready to Scale";
             text.innerText = "You have the basics, but need professional SOPs.";
-            content = `<div class="benefit-item">💰 <b>Profit Leak:</b> Even pros lose $400+ monthly.</div><div class="benefit-item">🤖 <b>Optimization:</b> Reclaim those last 5 hours.</div>`;
+            benefits.innerHTML = `<div class="benefit-item">🤖 <b>Optimization:</b> You are ready to fully automate and reclaim 5+ hours weekly.</div>`;
         }
-        benefits.innerHTML = content;
-    }
-
-    function restartQuiz() {
-        totalScore = 0;
-        document.getElementById('progressFill').style.width = '0%';
-        showPage(0);
     }
 </script>
 </body>
