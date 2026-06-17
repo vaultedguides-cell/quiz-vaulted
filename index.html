@@ -1,178 +1,871 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Readiness Test — Vaulted Guides</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Readiness Test — Vaulted Guides</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #080b14;
+  --bg2:      #0d1120;
+  --bgcard:   #141a2e;
+  --purple:   #8B5CF6;
+  --purple-l: #a78bfa;
+  --purple-d: #6d28d9;
+  --blue:     #3B82F6;
+  --blue-e:   #60a5fa;
+  --neon-p:   #b14aff;
+  --neon-b:   #00b4ff;
+  --neon-g:   #00ffa3;
+  --border:   rgba(139,92,246,0.20);
+  --text:     #f0f4ff;
+  --text2:    #94a3b8;
+  --text3:    #4b5a7a;
+}
 
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box;}
-        html,body{overflow-x:hidden;min-height:100vh;background:#0D1F3C;font-family:'DM Sans',sans-serif;}
-        body{background:linear-gradient(135deg,#06101f,#0D1F3C,#091728);display:flex;flex-direction:column;align-items:center;padding:20px 16px 60px;}
-        .card{width:100%;max-width:600px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4);color: #0D1F3C;}
-        .bar{height:5px;background:#E8EEF5;}
-        .fill{height:100%;background:linear-gradient(90deg,#00D4FF,#C9A84C);width:0%;transition:width .4s;}
-        .page{display:none; padding:40px 32px; text-align:center;}
-        .page.on{display:block;}
-        h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,32px);margin-bottom:14px;color: #0D1F3C;}
-        p{font-size:14px;color:#6a80a0;line-height:1.7;margin-bottom:24px;}
-        .opt{display:flex;align-items:center;gap:14px;padding:13px 18px;border:2px solid #E8EEF5;border-radius:12px;cursor:pointer;margin-bottom:10px;transition:.2s;text-align:left;font-size:14px;font-weight:500;}
-        .opt:hover{border-color:#00D4FF;background:#f0fcff;}
-        
-        .btn-res{background:#0D1F3C;color:#fff;border:none;padding:18px 44px;border-radius:14px;font-size:17px;font-weight:800;cursor:pointer;width:100%;text-decoration:none;display:inline-block;margin-top:10px;font-family:'DM Sans',sans-serif; text-align:center; transition: 0.3s;}
-        .btn-res:hover{transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
-        .btn-locked { background: #cbd5e1 !important; color: #64748b !important; cursor: not-allowed !important; pointer-events: none; opacity: 0.6; }
-        .btn-restart{background:transparent; color:#6a80a0; border:none; text-decoration:underline; font-size:12px; margin-top:20px; cursor:pointer;}
-        
-        .result-header { background: #f8fafc; padding: 24px; border-radius: 16px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
-        .diag-level { font-family: 'Playfair Display', serif; font-size: 24px; color: #0D1F3C; margin-bottom: 12px; font-weight: 700; }
-        .benefit-list{text-align:left;margin:20px 0;}
-        .benefit-item { margin-bottom: 15px; font-size: 14px; background: #f4f7fb; padding: 15px; border-radius: 10px; border-left: 4px solid #C9A84C; box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
-        .benefit-item b { color: #C9A84C; display: block; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin-bottom: 4px; }
-        
-        .coupon-section { background: linear-gradient(135deg, #0D1F3C, #1a2a3a); color: white; padding: 30px; border-radius: 16px; margin: 25px 0; border: 2px solid #C9A84C; }
-        .off-tag { font-size: 38px; font-weight: 900; color: #C9A84C; display: block; margin-bottom: 5px; letter-spacing: -1px; }
-        .coupon-code { font-family: 'DM Mono', monospace; font-size: 28px; color: #00D4FF; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border: 1px dashed rgba(0,212,255,0.4); display: block; margin: 15px 0; }
-    </style>
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html,body { min-height:100vh; overflow-x:hidden; }
+
+body {
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:32px 16px 60px;
+  background-image:
+    radial-gradient(ellipse 70% 50% at 20% -10%, rgba(139,92,246,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 110%, rgba(59,130,246,0.12) 0%, transparent 60%);
+}
+
+body::after {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    linear-gradient(rgba(139,92,246,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139,92,246,0.03) 1px, transparent 1px);
+  background-size:52px 52px;
+}
+
+/* CARD */
+.card {
+  position:relative; z-index:1;
+  width:100%; max-width:520px;
+  background:var(--bgcard);
+  border-radius:20px;
+  border:1px solid var(--border);
+  overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,92,246,0.08);
+  animation:rise .5s ease forwards;
+}
+
+@keyframes rise {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* PROGRESS BAR */
+.progress-bar { height:3px; background:rgba(139,92,246,0.12); }
+.progress-fill {
+  height:100%; width:0%;
+  background:linear-gradient(90deg, var(--neon-p), var(--neon-b));
+  transition:width .4s ease;
+  box-shadow:0 0 8px rgba(177,74,255,0.6);
+}
+
+/* PAGES */
+.page { display:none; padding:36px 32px; }
+.page.on { display:block; animation:fadeUp .3s ease; }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* HEADER AREA */
+.page-eyebrow {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px; letter-spacing:4px; text-transform:uppercase;
+  background:linear-gradient(90deg, var(--purple-l), var(--blue-e));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:14px;
+}
+
+.page-title {
+  font-size:clamp(22px,5vw,30px);
+  font-weight:900; line-height:1.1;
+  letter-spacing:-1px; margin-bottom:10px;
+}
+
+.page-title em {
+  font-style:normal;
+  background:linear-gradient(90deg, var(--neon-p), var(--neon-b));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 8px rgba(177,74,255,0.4));
+}
+
+.page-sub {
+  font-size:14px; color:var(--text2);
+  line-height:1.65; margin-bottom:24px;
+}
+
+/* OPTION BUTTONS */
+.opt {
+  display:flex; align-items:center; gap:14px;
+  padding:14px 18px; margin-bottom:10px;
+  border:1px solid var(--border); border-radius:12px;
+  background:rgba(139,92,246,0.04);
+  cursor:pointer; transition:all .2s;
+  font-size:14px; font-weight:500; color:var(--text2);
+  text-align:left;
+}
+
+.opt:hover {
+  border-color:var(--purple);
+  background:rgba(139,92,246,0.10);
+  color:var(--text);
+  transform:translateX(4px);
+  box-shadow:0 0 16px rgba(139,92,246,0.15);
+}
+
+.opt-icon {
+  width:32px; height:32px; border-radius:8px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px;
+  background:rgba(139,92,246,0.10);
+  border:1px solid rgba(139,92,246,0.2);
+}
+
+/* PRIMARY BUTTON */
+.btn-primary {
+  display:block; width:100%;
+  padding:16px 24px;
+  background:linear-gradient(135deg, var(--purple-d), var(--blue));
+  border:none; border-radius:12px;
+  color:#fff; font-family:'Inter',sans-serif;
+  font-size:15px; font-weight:700;
+  cursor:pointer; transition:all .2s;
+  box-shadow:0 4px 20px rgba(139,92,246,0.45);
+  letter-spacing:0.2px; text-align:center; text-decoration:none;
+}
+
+.btn-primary:hover {
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px rgba(139,92,246,0.6);
+}
+
+.btn-primary.gold {
+  background:linear-gradient(135deg, #C9A84C, #e8c96a);
+  color:#0D1F3C;
+  box-shadow:0 4px 20px rgba(201,168,76,0.4);
+}
+.btn-primary.gold:hover { box-shadow:0 8px 28px rgba(201,168,76,0.6); }
+
+.btn-primary:disabled, .btn-primary.locked {
+  background:rgba(139,92,246,0.08) !important;
+  color:var(--text3) !important;
+  cursor:not-allowed !important;
+  box-shadow:none !important;
+  transform:none !important;
+  border:1px solid var(--border);
+}
+
+.btn-ghost {
+  background:transparent; border:none;
+  color:var(--text3); font-size:12px;
+  text-decoration:underline; cursor:pointer;
+  margin-top:16px; display:block; text-align:center;
+  font-family:'Inter',sans-serif;
+}
+.btn-ghost:hover { color:var(--text2); }
+
+/* QUESTION NUMBER */
+.q-num {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; letter-spacing:3px; color:var(--text3);
+  text-transform:uppercase; margin-bottom:6px;
+}
+
+/* INTRO STATS */
+.intro-stats {
+  display:flex; gap:12px; margin-bottom:28px; flex-wrap:wrap;
+}
+.intro-stat {
+  flex:1; min-width:100px;
+  background:rgba(139,92,246,0.07);
+  border:1px solid var(--border); border-radius:10px;
+  padding:12px 14px; text-align:center;
+}
+.intro-stat-n {
+  font-family:'JetBrains Mono',monospace;
+  font-size:22px; font-weight:700;
+  background:linear-gradient(90deg, var(--purple-l), var(--blue-e));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  line-height:1; margin-bottom:4px;
+}
+.intro-stat-l {
+  font-size:10px; color:var(--text3);
+  font-family:'JetBrains Mono',monospace; letter-spacing:1px;
+}
+
+/* EMAIL GATE */
+.gate-box {
+  background:rgba(8,11,20,0.6);
+  border:1px solid var(--border); border-radius:14px;
+  padding:22px; margin-bottom:20px;
+}
+.gate-step {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px; letter-spacing:3px; color:var(--text3);
+  text-transform:uppercase; margin-bottom:8px;
+}
+.gate-note {
+  font-size:12px; color:var(--text3); margin-top:10px;
+  line-height:1.5; text-align:center;
+}
+.spam-note {
+  background:rgba(139,92,246,0.06);
+  border:1px solid rgba(139,92,246,0.15);
+  border-radius:8px; padding:12px 16px;
+  font-size:12px; color:var(--text3); line-height:1.6; margin-top:16px;
+}
+
+/* CALCULATOR PAGE */
+.calc-result {
+  background:linear-gradient(135deg, rgba(177,74,255,0.12), rgba(0,180,255,0.08));
+  border:1px solid rgba(139,92,246,0.35);
+  border-radius:16px; padding:22px; margin:20px 0;
+  position:relative; overflow:hidden;
+}
+.calc-result::before {
+  content:''; position:absolute; top:-30px; right:-30px;
+  width:100px; height:100px;
+  background:radial-gradient(circle, rgba(177,74,255,0.15), transparent 70%);
+  pointer-events:none;
+}
+.calc-eyebrow {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px; letter-spacing:3px; text-transform:uppercase;
+  background:linear-gradient(90deg, var(--neon-p), var(--neon-b));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:6px;
+}
+.calc-number {
+  font-family:'JetBrains Mono',monospace;
+  font-size:48px; font-weight:700; line-height:1;
+  background:linear-gradient(90deg, var(--neon-p), var(--neon-b));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 14px rgba(177,74,255,0.4));
+  margin-bottom:4px;
+}
+.calc-sub { font-size:12px; color:var(--text3); margin-bottom:16px; }
+
+.calc-rows { display:flex; flex-direction:column; gap:7px; }
+.calc-row {
+  display:flex; justify-content:space-between; align-items:center;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:8px; padding:9px 14px;
+}
+.calc-row span:first-child { font-size:11px; color:var(--text3); }
+.calc-row span:last-child {
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px; font-weight:600; color:var(--text);
+}
+
+/* SLIDERS */
+.slider-group { margin-bottom:18px; }
+.slider-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.slider-label { font-size:12px; font-weight:500; color:var(--text2); }
+.val-badge {
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px; color:var(--purple-l);
+  background:rgba(139,92,246,0.12);
+  border:1px solid rgba(139,92,246,0.25);
+  padding:2px 10px; border-radius:20px;
+  min-width:72px; text-align:center;
+}
+
+input[type="range"] {
+  width:100%; height:4px; border-radius:2px;
+  background:rgba(139,92,246,0.12);
+  outline:none; cursor:pointer; -webkit-appearance:none;
+  border:1px solid rgba(139,92,246,0.15);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance:none;
+  width:16px; height:16px; border-radius:50%;
+  background:linear-gradient(135deg, var(--purple), var(--blue));
+  border:2px solid var(--bg); cursor:pointer;
+  box-shadow:0 0 10px rgba(139,92,246,0.6);
+  transition:transform .15s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform:scale(1.3);
+  box-shadow:0 0 16px rgba(139,92,246,0.9);
+}
+
+/* MISSING BOX */
+.missing-box {
+  background:rgba(248,113,113,0.07);
+  border:1px solid rgba(248,113,113,0.25);
+  border-radius:12px; padding:18px 22px; margin:16px 0;
+  text-align:center;
+}
+.missing-label {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px; letter-spacing:3px; text-transform:uppercase;
+  color:#f87171; margin-bottom:6px;
+}
+.missing-number {
+  font-family:'JetBrains Mono',monospace;
+  font-size:32px; font-weight:700; color:#f87171;
+  line-height:1; margin-bottom:4px;
+  filter:drop-shadow(0 0 10px rgba(248,113,113,0.4));
+}
+.missing-sub { font-size:12px; color:rgba(248,113,113,0.6); }
+
+/* RESULTS PAGE */
+.diagnosis-box {
+  background:rgba(139,92,246,0.08);
+  border:1px solid var(--border);
+  border-radius:14px; padding:22px; margin-bottom:20px;
+}
+.diag-level {
+  font-size:18px; font-weight:800;
+  letter-spacing:-0.3px; margin-bottom:8px; color:var(--text);
+}
+.diag-text { font-size:13px; color:var(--text2); line-height:1.65; font-style:italic; }
+
+.benefit-item {
+  background:rgba(139,92,246,0.06);
+  border:1px solid rgba(139,92,246,0.15);
+  border-left:3px solid var(--purple);
+  border-radius:8px; padding:14px 16px; margin-bottom:10px;
+  transition:transform .2s, box-shadow .2s;
+}
+.benefit-item:hover {
+  transform:translateX(4px);
+  box-shadow:0 4px 16px rgba(139,92,246,0.12);
+}
+.benefit-item b {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  background:linear-gradient(90deg, var(--purple-l), var(--blue-e));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  display:block; margin-bottom:5px;
+}
+.benefit-item p { font-size:13px; color:var(--text2); line-height:1.55; margin:0; }
+
+/* COUPON */
+.coupon-box {
+  background:rgba(8,11,20,0.8);
+  border:1px solid rgba(139,92,246,0.35);
+  border-radius:14px; padding:24px; margin:20px 0; text-align:center;
+  position:relative; overflow:hidden;
+}
+.coupon-box::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(177,74,255,0.07), rgba(0,180,255,0.05));
+  pointer-events:none;
+}
+.coupon-tag {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px; letter-spacing:4px; text-transform:uppercase;
+  color:var(--text3); margin-bottom:8px;
+}
+.coupon-savings {
+  font-family:'JetBrains Mono',monospace;
+  font-size:42px; font-weight:700; line-height:1;
+  background:linear-gradient(90deg, var(--neon-p), var(--neon-b));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 16px rgba(177,74,255,0.5));
+  margin-bottom:6px;
+}
+.coupon-prices {
+  display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:12px;
+}
+.coupon-old { font-size:14px; text-decoration:line-through; color:var(--text3); }
+.coupon-new { font-family:'JetBrains Mono',monospace; font-size:28px; font-weight:700; color:#fff; }
+.coupon-save { font-size:11px; color:var(--neon-g); font-weight:600; }
+.coupon-code-wrap {
+  background:rgba(139,92,246,0.1);
+  border:1px dashed rgba(177,74,255,0.5);
+  border-radius:10px; padding:12px;
+  margin:14px 0; text-align:center;
+}
+.coupon-code-label {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px; letter-spacing:3px; color:var(--text3); margin-bottom:6px;
+}
+.coupon-code {
+  font-family:'JetBrains Mono',monospace;
+  font-size:28px; font-weight:700; letter-spacing:4px;
+  background:linear-gradient(90deg, var(--purple-l), var(--blue-e));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 10px rgba(139,92,246,0.5));
+}
+.coupon-note {
+  font-size:11px; color:var(--neon-g); font-weight:600; letter-spacing:0.5px;
+}
+
+/* SCORE INDICATOR */
+.score-bar-wrap {
+  background:rgba(139,92,246,0.08); border-radius:4px; height:6px;
+  margin:16px 0 4px; overflow:hidden;
+}
+.score-bar-fill {
+  height:100%; border-radius:4px;
+  background:linear-gradient(90deg, var(--purple), var(--blue-e));
+  box-shadow:0 0 8px rgba(139,92,246,0.5);
+  transition:width .8s ease;
+}
+.score-label {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; color:var(--text3); text-align:right;
+}
+
+/* PERSONALISED BADGE */
+.personal-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(0,255,163,0.08);
+  border:1px solid rgba(0,255,163,0.25);
+  border-radius:20px; padding:4px 12px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; color:var(--neon-g); letter-spacing:1px;
+  margin-bottom:14px;
+}
+
+/* DIVIDER */
+.div-line { height:1px; background:var(--border); margin:20px 0; }
+
+@media (max-width:500px) {
+  .page { padding:26px 20px; }
+  .calc-number { font-size:38px; }
+}
+</style>
 </head>
 <body>
 
 <div class="card">
-    <div class="bar"><div class="fill" id="progressFill"></div></div>
+  <div class="progress-bar"><div class="progress-fill" id="pFill"></div></div>
 
-    <div class="page on" id="p0">
-        <h1>The 5-Question <i>AI Readiness</i> Test</h1>
-        <p>Find out where your business is leaking profit and get the tools to fix it.</p>
-        <button class="btn-res" onclick="showPage(1)">Start Free Test</button>
+  <!-- ══════ PAGE 0: INTRO ══════ -->
+  <div class="page on" id="p0">
+    <div class="page-eyebrow">⚡ Vaulted Guides · Free Assessment</div>
+    <h1 class="page-title">The 5-Question<br><em>AI Readiness Test</em></h1>
+    <p class="page-sub">Find out exactly where your freelance business is leaking profit — and get a personalized income projection.</p>
+
+    <div class="intro-stats">
+      <div class="intro-stat">
+        <div class="intro-stat-n">5</div>
+        <div class="intro-stat-l">Questions</div>
+      </div>
+      <div class="intro-stat">
+        <div class="intro-stat-n">90s</div>
+        <div class="intro-stat-l">To complete</div>
+      </div>
+      <div class="intro-stat">
+        <div class="intro-stat-n">Free</div>
+        <div class="intro-stat-l">No credit card</div>
+      </div>
     </div>
 
-    <div class="page" id="p1"><h1>Question 1: AI Delegation?</h1><div class="opt" onclick="next(1, 5)">Nothing.</div><div class="opt" onclick="next(1, 15)">Basic tools.</div><div class="opt" onclick="next(1, 25)">Automated workflows.</div></div>
-    <div class="page" id="p2"><h1>Question 2: Admin Costs?</h1><div class="opt" onclick="next(2, 5)">No tracking.</div><div class="opt" onclick="next(2, 15)">Unorganized.</div><div class="opt" onclick="next(2, 25)">Automated tracking.</div></div>
-    <div class="page" id="p3"><h1>Question 3: Time Lost?</h1><div class="opt" onclick="next(3, 5)">15+ hours.</div><div class="opt" onclick="next(3, 15)">5-10 hours.</div><div class="opt" onclick="next(3, 25)">Less than 5.</div></div>
-    <div class="page" id="p4"><h1>Question 4: SOPs?</h1><div class="opt" onclick="next(4, 5)">Nothing written.</div><div class="opt" onclick="next(4, 15)">Basic docs.</div><div class="opt" onclick="next(4, 25)">Runs on SOPs.</div></div>
-    <div class="page" id="p5"><h1>Question 5: Scaling?</h1><div class="opt" onclick="next(5, 5)">At my limit.</div><div class="opt" onclick="next(5, 15)">Working more hours.</div><div class="opt" onclick="next(5, 25)">Scaling with Tech/AI.</div></div>
+    <button class="btn-primary" onclick="showPage(1)">Start Free Test →</button>
+  </div>
 
-    <div class="page" id="p_email">
-        <div class="em" style="font-size: 44px; margin-bottom: 10px;">🔒</div>
-        <h1>Results Locked</h1>
-        <p>Complete Step 1 to unlock your professional diagnosis and $20 OFF coupon.</p>
-        
-        <div style="text-align: left; background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
-            <p style="margin-bottom: 10px; color: #0D1F3C;"><b>Step 1:</b> Subscribe to unlock (New tab).</p>
-            <a href="https://preview.mailerlite.io/forms/2274104/184965579010999629/share" 
-               target="_blank" 
-               id="btn-subscribe"
-               class="btn-res" 
-               style="background:#C9A84C; color:#0D1F3C; text-decoration:none;"
-               onclick="unlock()">
-                1. SUBSCRIBE TO UNLOCK
-            </a>
-            <p style="margin-top:10px; font-size:14px; color:#6a80a0; text-align:center;">
-                ✅ After subscribing, <b>close that tab</b> and come back here to click Step 2.
-            </p>
-            
-            <p style="margin-top: 25px; margin-bottom: 10px; color: #0D1F3C; font-size:15px;"><b>Step 2:</b> Return here and click below.</p>
-            <button id="btn-results" class="btn-res btn-locked" onclick="showPage('final')">
-                2. VIEW MY RESULTS
-            </button>
-        </div>
-        <div style="background:#fff8e1; border:1px solid #f0c040; border-radius:10px; padding:14px 16px; margin-top:16px; text-align:left; font-size:12.5px; color:#7a6000; line-height:1.6;">
-            📬 <b>Can't find the email?</b> Check your <b>Spam or Promotions</b> folder — email filters can be strict. If it landed there, mark it as <b>"Not Spam"</b> to activate your discount code and links.
-        </div>
-        <button class="btn-restart" onclick="restartQuiz()">Restart Quiz</button>
+  <!-- ══════ QUESTION 1 ══════ -->
+  <div class="page" id="p1">
+    <div class="q-num">Question 1 of 5</div>
+    <h1 class="page-title" style="font-size:22px;">What do you currently<br>delegate to AI?</h1>
+    <p class="page-sub" style="font-size:13px;">Be honest — this shapes your personalized results.</p>
+    <div class="opt" onclick="next(1,5,35)">
+      <div class="opt-icon">😶</div>
+      <span>Nothing — I do everything manually</span>
+    </div>
+    <div class="opt" onclick="next(1,15,25)">
+      <div class="opt-icon">🤖</div>
+      <span>Basic tools, nothing structured</span>
+    </div>
+    <div class="opt" onclick="next(1,25,15)">
+      <div class="opt-icon">⚡</div>
+      <span>Automated workflows across my business</span>
+    </div>
+  </div>
+
+  <!-- ══════ QUESTION 2 ══════ -->
+  <div class="page" id="p2">
+    <div class="q-num">Question 2 of 5</div>
+    <h1 class="page-title" style="font-size:22px;">How much time do you spend<br>on admin tasks per week?</h1>
+    <p class="page-sub" style="font-size:13px;">Emails, invoices, proposals, scheduling...</p>
+    <div class="opt" onclick="next(2,5,60)">
+      <div class="opt-icon">😰</div>
+      <span>15+ hours — it's killing my productivity</span>
+    </div>
+    <div class="opt" onclick="next(2,15,45)">
+      <div class="opt-icon">😐</div>
+      <span>5–10 hours, it adds up</span>
+    </div>
+    <div class="opt" onclick="next(2,25,25)">
+      <div class="opt-icon">✅</div>
+      <span>Under 5 hours — mostly automated</span>
+    </div>
+  </div>
+
+  <!-- ══════ QUESTION 3 ══════ -->
+  <div class="page" id="p3">
+    <div class="q-num">Question 3 of 5</div>
+    <h1 class="page-title" style="font-size:22px;">How do you handle<br>client proposals?</h1>
+    <p class="page-sub" style="font-size:13px;">Time spent here directly impacts win rates.</p>
+    <div class="opt" onclick="next(3,5,0)">
+      <div class="opt-icon">✍️</div>
+      <span>I write each one from scratch every time</span>
+    </div>
+    <div class="opt" onclick="next(3,15,0)">
+      <div class="opt-icon">📋</div>
+      <span>I have a template but customize heavily</span>
+    </div>
+    <div class="opt" onclick="next(3,25,0)">
+      <div class="opt-icon">🚀</div>
+      <span>AI generates a draft in minutes</span>
+    </div>
+  </div>
+
+  <!-- ══════ QUESTION 4 ══════ -->
+  <div class="page" id="p4">
+    <div class="q-num">Question 4 of 5</div>
+    <h1 class="page-title" style="font-size:22px;">Do you have documented<br>SOPs for your workflow?</h1>
+    <p class="page-sub" style="font-size:13px;">Standard Operating Procedures = scalability.</p>
+    <div class="opt" onclick="next(4,5,0)">
+      <div class="opt-icon">❌</div>
+      <span>Nothing written — it's all in my head</span>
+    </div>
+    <div class="opt" onclick="next(4,15,0)">
+      <div class="opt-icon">📄</div>
+      <span>Some basic notes, not organized</span>
+    </div>
+    <div class="opt" onclick="next(4,25,0)">
+      <div class="opt-icon">🏗️</div>
+      <span>My business runs on clear SOPs</span>
+    </div>
+  </div>
+
+  <!-- ══════ QUESTION 5 ══════ -->
+  <div class="page" id="p5">
+    <div class="q-num">Question 5 of 5</div>
+    <h1 class="page-title" style="font-size:22px;">How are you currently<br>scaling your income?</h1>
+    <p class="page-sub" style="font-size:13px;">The answer reveals your ceiling.</p>
+    <div class="opt" onclick="next(5,5,0)">
+      <div class="opt-icon">🧱</div>
+      <span>I'm at my limit — can't take more clients</span>
+    </div>
+    <div class="opt" onclick="next(5,15,0)">
+      <div class="opt-icon">😓</div>
+      <span>Working more hours to earn more</span>
+    </div>
+    <div class="opt" onclick="next(5,25,0)">
+      <div class="opt-icon">📈</div>
+      <span>Scaling with AI and systems, not hours</span>
+    </div>
+  </div>
+
+  <!-- ══════ EMAIL GATE ══════ -->
+  <div class="page" id="p_email">
+    <div class="page-eyebrow">🔒 Almost there</div>
+    <h1 class="page-title" style="font-size:24px;">Your results are<br><em>ready to unlock</em></h1>
+    <p class="page-sub">One step to see your personalized income projection and your exclusive coupon.</p>
+
+    <div class="gate-box">
+      <div class="gate-step">Step 1 — Subscribe to unlock</div>
+      <a href="https://preview.mailerlite.io/forms/2274104/184965579010999629/share"
+         target="_blank"
+         id="btn-subscribe"
+         class="btn-primary gold"
+         onclick="startUnlock()">
+        1. Subscribe Free →
+      </a>
+      <p class="gate-note">Opens in a new tab. Come back here after subscribing.</p>
     </div>
 
-    <div class="page" id="p_final">
-        <div class="result-header">
-            <div class="diag-level" id="diagLevel">Analyzing...</div>
-            <p id="diagText" style="margin-bottom:0; font-size:14px; font-style: italic;"></p>
-        </div>
-        <div class="benefit-list" id="dynamicBenefits"></div>
-        
-        <div class="coupon-section">
-            <span class="off-tag">$20.00 OFF</span>
-            <p style="color:rgba(255,255,255,0.7); font-size:12px;">Use this code at checkout:</p>
-            <div class="coupon-code">VAULT50</div>
-            <p style="font-size:12px; color:#C9A84C; font-weight:800; letter-spacing: 0.5px;">
-                ⚠️ ONLY 50 REDEMPTIONS AVAILABLE TOTAL
-            </p>
-        </div>
-        
-        <p style="font-size:13px; margin-bottom:15px;">Get the full <b>Vaulted Guides Bundle</b> and stop leaking profit today:</p>
-        <a href="https://payhip.com/b/xN9Od" target="_blank" class="btn-res">GET THE BUNDLE HERE</a>
-        <br><button class="btn-restart" onclick="restartQuiz()">Restart Quiz</button>
+    <div class="gate-box" style="margin-bottom:0;">
+      <div class="gate-step">Step 2 — View your results</div>
+      <button id="btn-results" class="btn-primary locked" onclick="showPage('calc')">
+        2. See My Results →
+      </button>
     </div>
-</div>
+
+    <div class="spam-note">
+      📬 <strong style="color:var(--text2);">Can't find the email?</strong> Check Spam or Promotions. Mark it as "Not Spam" to get your discount code.
+    </div>
+    <button class="btn-ghost" onclick="restart()">↩ Restart quiz</button>
+  </div>
+
+  <!-- ══════ CALCULATOR PAGE ══════ -->
+  <div class="page" id="p_calc">
+    <div class="personal-badge">✦ Personalized from your answers</div>
+    <div class="page-eyebrow">Your Income Projection</div>
+    <h1 class="page-title" style="font-size:24px;">Here's how much<br><em>you're leaving behind</em></h1>
+    <p class="page-sub" style="font-size:13px;">Pre-filled based on your quiz. Adjust the sliders to fine-tune.</p>
+
+    <!-- SLIDERS -->
+    <div class="slider-group">
+      <div class="slider-row">
+        <span class="slider-label">Your hourly rate</span>
+        <div class="val-badge" id="rateVal">$45/hr</div>
+      </div>
+      <input type="range" id="rate" min="15" max="200" value="45" step="5" oninput="calc()">
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-row">
+        <span class="slider-label">Hours worked per week</span>
+        <div class="val-badge" id="hoursVal">35 hrs</div>
+      </div>
+      <input type="range" id="hours" min="10" max="60" value="35" step="1" oninput="calc()">
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-row">
+        <span class="slider-label">Time on admin tasks</span>
+        <div class="val-badge" id="adminVal">35%</div>
+      </div>
+      <input type="range" id="admin" min="10" max="70" value="35" step="5" oninput="calc()">
+    </div>
+
+    <div class="div-line"></div>
+
+    <!-- RESULT -->
+    <div class="calc-result">
+      <div class="calc-eyebrow">⚡ With AI you could earn</div>
+      <div class="calc-number" id="aiIncome">$8,127</div>
+      <div class="calc-sub">per month — vs your current <strong style="color:var(--text2);" id="currentIncome">$6,300</strong></div>
+      <div class="calc-rows">
+        <div class="calc-row">
+          <span>⏱ Hours recovered / week</span>
+          <span id="hrsRecovered">8.6 hrs</span>
+        </div>
+        <div class="calc-row">
+          <span>📅 Extra billable days / month</span>
+          <span id="extraDays">4.3 days</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MISSING -->
+    <div class="missing-box">
+      <div class="missing-label">⚠ Left on the table every month</div>
+      <div class="missing-number" id="missing">$1,827</div>
+      <div class="missing-sub" id="missingYear">That's $21,924 every year</div>
+    </div>
+
+    <button class="btn-primary" onclick="showPage('final')" style="margin-top:4px;">
+      See My Full Diagnosis →
+    </button>
+  </div>
+
+  <!-- ══════ FINAL RESULTS ══════ -->
+  <div class="page" id="p_final">
+    <div class="page-eyebrow">⚡ Your AI Readiness Score</div>
+
+    <!-- SCORE BAR -->
+    <div class="score-bar-wrap">
+      <div class="score-bar-fill" id="scoreBar" style="width:0%"></div>
+    </div>
+    <div class="score-label" id="scoreLabel">Calculating...</div>
+
+    <!-- DIAGNOSIS -->
+    <div class="diagnosis-box" style="margin-top:16px;">
+      <div class="diag-level" id="diagLevel">Analyzing...</div>
+      <p class="diag-text" id="diagText"></p>
+    </div>
+
+    <!-- BENEFITS -->
+    <div id="dynamicBenefits"></div>
+
+    <!-- INCOME CALLOUT -->
+    <div style="background:rgba(248,113,113,0.07); border:1px solid rgba(248,113,113,0.2); border-radius:10px; padding:14px 18px; margin:16px 0; text-align:center;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; color:#f87171; margin-bottom:4px; text-transform:uppercase;">Based on your numbers</div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:26px; font-weight:700; color:#f87171;" id="finalMissing">$—</div>
+      <div style="font-size:12px; color:rgba(248,113,113,0.6);">lost every year without AI</div>
+    </div>
+
+    <!-- COUPON -->
+    <div class="coupon-box">
+      <div class="coupon-tag">🎁 Exclusive discount for quiz completers</div>
+      <div class="coupon-savings">$20 OFF</div>
+      <div class="coupon-prices">
+        <span class="coupon-old">$49</span>
+        <span class="coupon-new">$29</span>
+        <span class="coupon-save">you save $20</span>
+      </div>
+      <div class="coupon-code-wrap">
+        <div class="coupon-code-label">Use this code at checkout</div>
+        <div class="coupon-code">CP20</div>
+      </div>
+      <div class="coupon-note">⚠ Limited redemptions available</div>
+    </div>
+
+    <div style="background:rgba(139,92,246,0.07); border:1px solid rgba(139,92,246,0.2); border-radius:14px; padding:20px 22px; margin:16px 0; text-align:left;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; background:linear-gradient(90deg,var(--purple-l),var(--blue-e)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:10px;">The system that closes your gap</div>
+      <div style="font-size:15px; font-weight:700; color:var(--text); margin-bottom:8px; letter-spacing:-0.3px;">The Freelance Revenue Protocol</div>
+      <p style="font-size:13px; color:var(--text2); line-height:1.65; margin-bottom:12px;">The numbers above show exactly where your income is leaking. This 7-chapter AI framework gives you the step-by-step system to stop that leak — automating your admin, sharpening your proposals, positioning your rates and building SOPs so your business runs without you working more hours.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:6px;">
+        <span style="background:rgba(139,92,246,0.10); border:1px solid rgba(139,92,246,0.25); border-radius:20px; padding:3px 10px; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--purple-l);">7 chapters</span>
+        <span style="background:rgba(59,130,246,0.10); border:1px solid rgba(59,130,246,0.25); border-radius:20px; padding:3px 10px; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--blue-e);">200 AI prompts</span>
+        <span style="background:rgba(0,255,163,0.07); border:1px solid rgba(0,255,163,0.2); border-radius:20px; padding:3px 10px; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--neon-g);">30-day action plan</span>
+        <span style="background:rgba(248,113,113,0.07); border:1px solid rgba(248,113,113,0.2); border-radius:20px; padding:3px 10px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#f87171;">Interactive workspace</span>
+      </div>
+    </div>
+
+    <a href="https://payhip.com/b/xN9Od" target="_blank" class="btn-primary">
+      Get it for $29 — Use Code CP20 →
+    </a>
+
+    <div class="div-line"></div>
+
+    <button class="btn-ghost" onclick="restart()">↩ Retake the quiz</button>
+  </div>
+
+</div><!-- /card -->
 
 <script>
-    let totalScore = 0;
+// ── STATE ──────────────────────────────────────
+let score = 0;
+let adminPreset = 35; // default admin % from Q2
 
-    function showPage(id) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
-        const target = id === 'final' ? document.getElementById('p_final') : id === 'email' ? document.getElementById('p_email') : document.getElementById('p' + id);
-        if(target) target.classList.add('on');
-        if(id === 'final') calculateResult();
-    }
+// ── NAVIGATION ────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+  let el;
+  if (id === 'calc')  el = document.getElementById('p_calc');
+  else if (id === 'final') el = document.getElementById('p_final');
+  else if (id === 'email') el = document.getElementById('p_email');
+  else el = document.getElementById('p' + id);
+  if (el) el.classList.add('on');
+  if (id === 'final') buildFinal();
+  if (id === 'calc')  initCalc();
+  // Scroll to top of card on every page change
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-    function unlock() {
-        setTimeout(function() {
-            const btnResults = document.getElementById('btn-results');
-            btnResults.classList.remove('btn-locked');
-            btnResults.style.background = "#0D1F3C";
-            btnResults.innerText = "2. VIEW MY RESULTS (Unlocked!)";
-        }, 1200);
-    }
+// ── QUIZ LOGIC ────────────────────────────────
+function next(qNum, pts, adminHint) {
+  score += pts;
+  // Q2 adminHint sets the admin slider preset
+  if (qNum === 2 && adminHint > 0) adminPreset = adminHint;
+  // progress: 20% per question
+  document.getElementById('pFill').style.width = (qNum * 20) + '%';
+  if (qNum < 5) showPage(qNum + 1);
+  else showPage('email');
+}
 
-    function next(current, score) {
-        totalScore += score;
-        document.getElementById('progressFill').style.width = (current * 20) + '%';
-        current < 5 ? showPage(current + 1) : showPage('email');
-    }
+// ── EMAIL UNLOCK ──────────────────────────────
+function startUnlock() {
+  setTimeout(function() {
+    const btn = document.getElementById('btn-results');
+    btn.classList.remove('locked');
+    btn.removeAttribute('disabled');
+    btn.textContent = '2. See My Results → (Unlocked!)';
+  }, 1200);
+}
 
-    function calculateResult() {
-        const level = document.getElementById('diagLevel');
-        const text = document.getElementById('diagText');
-        const benefits = document.getElementById('dynamicBenefits');
-        let content = "";
+// ── CALCULATOR ────────────────────────────────
+function initCalc() {
+  // Pre-set admin slider from quiz answer
+  document.getElementById('admin').value = adminPreset;
+  document.getElementById('pFill').style.width = '90%';
+  calc();
+}
 
-        if(totalScore <= 50) {
-            level.innerText = "🚨 CRITICAL: The Manual Operator Trap";
-            text.innerText = "Your business is currently 100% dependent on your physical time. If you stop, the income stops.";
-            content = `
-                <div class="benefit-item"><b>💸 Annual Profit Leak:</b> Estimated $18,000+ lost in unbillable admin tasks and manual follow-ups.</div>
-                <div class="benefit-item"><b>⏳ Time Recovery:</b> You can reclaim 60+ hours a month by implementing our AI Automation Roadmap.</div>
-                <div class="benefit-item"><b>🛠 Priority Fix:</b> You need standardized SOPs and basic AI delegation to stop the burnout.</div>
-            `;
-        } else if(totalScore <= 90) {
-            level.innerText = "⚠️ WARNING: The Hybrid Chaos Phase";
-            text.innerText = "You have tools, but they don't talk to each other. You're working harder than necessary.";
-            content = `
-                <div class="benefit-item"><b>📉 Efficiency Leak:</b> You're operating at only 40% of your potential capacity due to 'technical friction'.</div>
-                <div class="benefit-item"><b>🤖 The Missing Link:</b> Your business needs automated workflows to scale without adding expensive staff.</div>
-                <div class="benefit-item"><b>🚀 Scaling Potential:</b> Streamlining your current chaos could double your output in less than 30 days.</div>
-            `;
-        } else {
-            level.innerText = "🏆 ELITE: Ready for AI Expansion";
-            text.innerText = "You have a solid foundation, but you're missing the 'Pro-Level' automation that separates 6-figure businesses from 7-figure ones.";
-            content = `
-                <div class="benefit-item"><b>💎 Opportunity Gap:</b> Small friction points in your funnel are costing you 'hidden' high-ticket clients.</div>
-                <div class="benefit-item"><b>⚡ Performance Boost:</b> Fine-tuning your SOPs will allow for 100% passive lead generation and management.</div>
-                <div class="benefit-item"><b>🎯 Next Step:</b> Implement the FIRT System to remove yourself entirely from the daily operation.</div>
-            `;
-        }
-        benefits.innerHTML = content;
-    }
+function calc() {
+  const rate     = +document.getElementById('rate').value;
+  const hrs      = +document.getElementById('hours').value;
+  const adminPct = +document.getElementById('admin').value / 100;
 
-    function restartQuiz() {
-        totalScore = 0;
-        document.getElementById('progressFill').style.width = '0%';
-        const btnResults = document.getElementById('btn-results');
-        btnResults.classList.add('btn-locked');
-        btnResults.innerText = "2. VIEW MY RESULTS";
-        showPage(0);
-    }
+  document.getElementById('rateVal').textContent  = '$' + rate + '/hr';
+  document.getElementById('hoursVal').textContent = hrs + ' hrs';
+  document.getElementById('adminVal').textContent = Math.round(adminPct * 100) + '%';
+
+  const weeks         = 4.33;
+  const adminHrs      = hrs * adminPct;
+  const billable      = hrs - adminHrs;
+  const currentMonthly = billable * weeks * rate;
+  const recovered     = adminHrs * 0.70;
+  const newBillable   = billable + recovered;
+  const aiMonthly     = newBillable * weeks * rate;
+  const diff          = aiMonthly - currentMonthly;
+
+  document.getElementById('currentIncome').textContent = '$' + Math.round(currentMonthly).toLocaleString();
+  document.getElementById('aiIncome').textContent      = '$' + Math.round(aiMonthly).toLocaleString();
+  document.getElementById('hrsRecovered').textContent  = recovered.toFixed(1) + ' hrs';
+  document.getElementById('extraDays').textContent     = (recovered * weeks / 8).toFixed(1) + ' days';
+  document.getElementById('missing').textContent       = '$' + Math.round(diff).toLocaleString();
+  document.getElementById('missingYear').textContent   = "That's $" + Math.round(diff * 12).toLocaleString() + ' every year';
+
+  // Store for final page
+  window._annualGap = Math.round(diff * 12);
+}
+
+// ── FINAL RESULTS ─────────────────────────────
+function buildFinal() {
+  document.getElementById('pFill').style.width = '100%';
+
+  // Score bar (max 125)
+  const pct = Math.round((score / 125) * 100);
+  setTimeout(() => {
+    document.getElementById('scoreBar').style.width = pct + '%';
+    document.getElementById('scoreLabel').textContent = 'AI Readiness Score: ' + pct + '%';
+  }, 200);
+
+  const level = document.getElementById('diagLevel');
+  const text  = document.getElementById('diagText');
+  const benefits = document.getElementById('dynamicBenefits');
+
+  let levelTxt, textTxt, content;
+
+  if (score <= 50) {
+    levelTxt = '🚨 Critical — The Manual Operator Trap';
+    textTxt  = 'Your business is 100% dependent on your physical time. Every hour you don\'t work is an hour with zero income.';
+    content  = `
+      <div class="benefit-item"><b>💸 Annual Profit Leak</b><p>Estimated $18,000+ lost in unbillable admin tasks and manual processes every year.</p></div>
+      <div class="benefit-item"><b>⏳ Recovery Potential</b><p>You can reclaim 60+ hours a month immediately with our AI Automation Roadmap.</p></div>
+      <div class="benefit-item"><b>🛠 Priority Fix</b><p>Standardized SOPs and basic AI delegation will stop the burnout cycle within 2 weeks.</p></div>`;
+  } else if (score <= 90) {
+    levelTxt = '⚠️ Warning — The Hybrid Chaos Phase';
+    textTxt  = 'You have tools, but they don\'t talk to each other. You\'re working harder than necessary for results you could automate.';
+    content  = `
+      <div class="benefit-item"><b>📉 Efficiency Gap</b><p>You're operating at roughly 40% of your potential capacity due to unconnected workflows.</p></div>
+      <div class="benefit-item"><b>🤖 Missing Link</b><p>Automated workflows would let you scale revenue without adding hours or staff costs.</p></div>
+      <div class="benefit-item"><b>🚀 30-Day Opportunity</b><p>Consolidating your tools with AI could double your output before next month ends.</p></div>`;
+  } else {
+    levelTxt = '🏆 Elite — Ready for AI Expansion';
+    textTxt  = 'Solid foundation. But you\'re missing the pro-level automation that separates 6-figure from 7-figure freelancers.';
+    content  = `
+      <div class="benefit-item"><b>💎 Opportunity Gap</b><p>Small friction points in your funnel are costing you high-ticket clients you never even see.</p></div>
+      <div class="benefit-item"><b>⚡ Performance Boost</b><p>Fine-tuning your SOPs unlocks 100% passive lead generation — income while you sleep.</p></div>
+      <div class="benefit-item"><b>🎯 Next Level</b><p>The Revenue Protocol removes you from daily operations so you can focus on growth.</p></div>`;
+  }
+
+  level.textContent = levelTxt;
+  text.textContent  = textTxt;
+  benefits.innerHTML = content;
+
+  // Pull annual gap from calculator
+  const gap = window._annualGap || 0;
+  document.getElementById('finalMissing').textContent =
+    gap > 0 ? '$' + gap.toLocaleString() + '/yr' : 'Calculate on prev. page';
+}
+
+// ── RESTART ───────────────────────────────────
+function restart() {
+  score = 0;
+  adminPreset = 35;
+  document.getElementById('pFill').style.width = '0%';
+  const btn = document.getElementById('btn-results');
+  btn.classList.add('locked');
+  btn.textContent = '2. See My Results →';
+  showPage(0);
+}
 </script>
 </body>
-</html>﻿
-
+</html>
