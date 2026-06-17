@@ -810,11 +810,9 @@ function showCheckmark() {
 
   // Auto-dismiss after 2s then go to email gate
   setTimeout(() => {
+    showPage('email'); // cargar email gate ANTES del fade
     overlay.style.animation = 'fadeOut .3s ease forwards';
-    setTimeout(() => {
-      overlay.remove();
-      showPage('email');
-    }, 300);
+    setTimeout(() => overlay.remove(), 300);
   }, 4000);
 }
 
